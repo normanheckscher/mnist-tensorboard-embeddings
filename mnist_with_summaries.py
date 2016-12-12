@@ -51,10 +51,8 @@ def train():
         x = tf.placeholder(tf.float32, [None, 784], name='x-input')
         y_ = tf.placeholder(tf.float32, [None, 10], name='y-input')
 
-    ######## norman ########
     with tf.device("/cpu:0"):
         embedding = tf.Variable(tf.pack(mnist.test.images[:FLAGS.max_steps], axis=0), trainable=False, name='embedding')
-    ######## norman ########
 
     with tf.name_scope('input_reshape'):
         image_shaped_input = tf.reshape(x, [-1, 28, 28, 1])
@@ -151,7 +149,6 @@ def train():
 
     tf.global_variables_initializer().run()
 
-#############
     saver = tf.train.Saver()
     writer = tf.train.SummaryWriter(FLAGS.log_dir + '/projector', sess.graph)
     # Add embedding tensorboard visualization. Need tensorflow version
@@ -164,7 +161,6 @@ def train():
     # Specify the width and height of a single thumbnail.
     embed.sprite.single_image_dim.extend([28, 28])
     projector.visualize_embeddings(writer, config)
-#############
 
     # Train the model, and also write summaries.
     # Every 10th step, measure test-set accuracy, and write test summaries
@@ -202,15 +198,12 @@ def train():
             else:  # Record a summary
                 summary, _ = sess.run([merged, train_step], feed_dict=feed_dict(True))
                 train_writer.add_summary(summary, i)
-    ######## norman ########
     saver.save(sess, os.path.join(
         FLAGS.log_dir, 'projector/a_model.ckpt'), global_step=FLAGS.max_steps)
-    ######## norman ########
     train_writer.close()
     test_writer.close()
 
 
-######## norman ########
 def generate_metadata_file():
     # Import data
     mnist = input_data.read_data_sets(FLAGS.data_dir,
@@ -225,14 +218,6 @@ def generate_metadata_file():
     # save metadata file
     save_metadata(FLAGS.log_dir + '/projector/metadata.tsv')
 
-def look():
-    mnist = input_data.read_data_sets(FLAGS.data_dir,
-                                      one_hot=True,
-                                      fake_data=FLAGS.fake_data)
-    print(mnist.train.images[:1000])
-######## norman ########
-
-
 def main(_):
     if tf.gfile.Exists(FLAGS.log_dir + '/train'):
         tf.gfile.DeleteRecursively(FLAGS.log_dir + '/train')
@@ -240,10 +225,7 @@ def main(_):
         tf.gfile.DeleteRecursively(FLAGS.log_dir + '/projector')
         tf.gfile.MkDir(FLAGS.log_dir + '/projector')
     tf.gfile.MakeDirs(FLAGS.log_dir)
-    ######## norman ########
     generate_metadata_file()
-#    look()
-    ######## norman ########
     train()
 
 if __name__ == '__main__':
@@ -257,9 +239,9 @@ if __name__ == '__main__':
                         help='Initial learning rate')
     parser.add_argument('--dropout', type=float, default=0.9,
                         help='Keep probability for training dropout.')
-    parser.add_argument('--data_dir', type=str, default='/Users/norman/Documents/workspace/quantstart/mnist_data',
+    parser.add_argument('--data_dir', type=str, default='/Users/norman/Documents/workspace/mnist/mnist_data',
                         help='Directory for storing input data')
-    parser.add_argument('--log_dir', type=str, default='/Users/norman/Documents/workspace/quantstart/logs/mnist_with_summaries',
+    parser.add_argument('--log_dir', type=str, default='/Users/norman/Documents/workspace/mnist/logs/mnist_with_summaries',
                         help='Summaries log directory')
     FLAGS, unparsed = parser.parse_known_args()
     tf.app.run(main=main, argv=[sys.argv[0]] + unparsed)
