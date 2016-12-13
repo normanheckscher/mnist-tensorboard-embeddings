@@ -19,6 +19,9 @@ tf.name_scope to make a graph legible in the TensorBoard graph explorer, and of
 naming summary tags so that they are grouped meaningfully in TensorBoard.
 
 It demonstrates the functionality of every TensorBoard dashboard.
+
+Updated by Norman Heckscher to use display Embedding Visualization.
+https://www.tensorflow.org/versions/r0.12/how_tos/embedding_viz/index.html#tensorboard-embedding-visualization
 """
 from __future__ import absolute_import
 from __future__ import division
@@ -51,6 +54,8 @@ def train():
         x = tf.placeholder(tf.float32, [None, 784], name='x-input')
         y_ = tf.placeholder(tf.float32, [None, 10], name='y-input')
 
+    # Input set for Embedded TensorBoard visualization
+    # Performed with cpu to conserve memory and processing power
     with tf.device("/cpu:0"):
         embedding = tf.Variable(tf.pack(mnist.test.images[:FLAGS.max_steps], axis=0), trainable=False, name='embedding')
 
