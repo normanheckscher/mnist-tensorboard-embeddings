@@ -34,7 +34,7 @@ import tensorflow as tf
 from tensorflow.examples.tutorials.mnist import input_data
 FLAGS = None
 
-def train():
+def generate_embeddings():
     # Import data
     mnist = input_data.read_data_sets(FLAGS.data_dir,
                                       one_hot=True,
@@ -85,7 +85,7 @@ def main(_):
         tf.gfile.MkDir(FLAGS.log_dir + '/projector')
     tf.gfile.MakeDirs(FLAGS.log_dir)
     generate_metadata_file()
-    train()
+    generate_embeddings()
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
