@@ -1,5 +1,5 @@
 # mnist-tensorboard-embeddings
-[![Build Status](https://travis-ci.org/hunkim/word-rnn-tensorflow.svg?branch=master)](https://travis-ci.org/hunkim/word-rnn-tensorflow)
+[![Build Status](https://travis-ci.org/normanheckscher/mnist-tensorboard-embeddings.svg?branch=master)](https://travis-ci.org/normanheckscher/mnist-tensorboard-embeddings)
 
 TensorBoard is a suite of web applications for inspecting and understanding your
 TensorFlow runs and graphs.
