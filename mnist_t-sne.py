@@ -83,7 +83,7 @@ def main(_):
     if tf.gfile.Exists(FLAGS.log_dir + '/projector'):
         tf.gfile.DeleteRecursively(FLAGS.log_dir + '/projector')
         tf.gfile.MkDir(FLAGS.log_dir + '/projector')
-    tf.gfile.MakeDirs(FLAGS.log_dir)
+    tf.gfile.MakeDirs(FLAGS.log_dir  + '/projector') # fix the directory to be created
     generate_metadata_file()
     generate_embeddings()
 
