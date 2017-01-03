@@ -1,2 +1,7 @@
 /mnist_with_summaries.zip
 /mnist_data.zip
+/mnist_data/train-labels-idx1-ubyte.gz
+/mnist_data/train-images-idx3-ubyte.gz
+/mnist_data/t10k-labels-idx1-ubyte.gz
+/mnist_data/t10k-images-idx3-ubyte.gz
+/.idea
