@@ -130,7 +130,7 @@ def train():
         # So here we use tf.nn.softmax_cross_entropy_with_logits on the
         # raw outputs of the nn_layer above, and then average across
         # the batch.
-        diff = tf.nn.softmax_cross_entropy_with_logits(y, y_)
+        diff = tf.nn.softmax_cross_entropy_with_logits(logits=y, labels=y_)
         with tf.name_scope('total'):
             cross_entropy = tf.reduce_mean(diff)
     tf.summary.scalar('cross_entropy', cross_entropy)
@@ -148,18 +148,18 @@ def train():
 
     # Merge all the summaries and write them out to /tmp/mnist_logs (by default)
     merged = tf.summary.merge_all()
-    train_writer = tf.train.SummaryWriter(FLAGS.log_dir + '/train',
+    train_writer = tf.summary.FileWriter(FLAGS.log_dir + '/train',
                                           sess.graph)
-    test_writer = tf.train.SummaryWriter(FLAGS.log_dir + '/test')
+    test_writer = tf.summary.FileWriter(FLAGS.log_dir + '/test')
 
     tf.global_variables_initializer().run()
 
     saver = tf.train.Saver()
-    writer = tf.train.SummaryWriter(FLAGS.log_dir + '/projector', sess.graph)
+    writer = tf.summary.FileWriter(FLAGS.log_dir + '/projector', sess.graph)
     # Add embedding tensorboard visualization. Need tensorflow version
     # >= 0.12.0RC0
     config = projector.ProjectorConfig()
-    embed= config.embeddings.add()
+    embed = config.embeddings.add()
     embed.tensor_name = 'embedding:0'
     embed.metadata_path = os.path.join(FLAGS.log_dir + '/projector/metadata.tsv')
     embed.sprite.image_path = os.path.join(FLAGS.data_dir + '/mnist_10k_sprite.png')

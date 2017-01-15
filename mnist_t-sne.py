@@ -49,7 +49,7 @@ def generate_embeddings():
     tf.global_variables_initializer().run()
 
     saver = tf.train.Saver()
-    writer = tf.train.SummaryWriter(FLAGS.log_dir + '/projector', sess.graph)
+    writer = tf.summary.FileWriter(FLAGS.log_dir + '/projector', sess.graph)
 
     # Add embedding tensorboard visualization. Need tensorflow version
     # >= 0.12.0RC0
