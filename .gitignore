@@ -6,3 +6,4 @@
 /mnist_data/t10k-images-idx3-ubyte.gz
 /.idea
 *.pyc
+.DS_Store
