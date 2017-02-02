@@ -57,7 +57,7 @@ def train():
     # Input set for Embedded TensorBoard visualization
     # Performed with cpu to conserve memory and processing power
     with tf.device("/cpu:0"):
-        embedding = tf.Variable(tf.pack(mnist.test.images[:FLAGS.max_steps], axis=0), trainable=False, name='embedding')
+        embedding = tf.Variable(tf.stack(mnist.test.images[:FLAGS.max_steps], axis=0), trainable=False, name='embedding')
 
     with tf.name_scope('input_reshape'):
         image_shaped_input = tf.reshape(x, [-1, 28, 28, 1])
