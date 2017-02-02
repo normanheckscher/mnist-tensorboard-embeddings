@@ -20,7 +20,7 @@ useful projection is
 [t-SNE](https://en.wikipedia.org/wiki/T-distributed_stochastic_neighbor_embedding).
 
 # Requirements
-- [Tensorflow](http://www.tensorflow.org) r0.12
+- [Tensorflow](http://www.tensorflow.org) r1.0
 
 # Sample output
 
